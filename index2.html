@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Com Você 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Georgia", serif;
+            background: linear-gradient(135deg, #ffd1dc 0%, #ffb6c1 50%, #ffc0cb 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .falling-emojis {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 24px;
+            animation: fall linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .title {
+            font-size: 3.5rem;
+            color: #d4af37;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #fff;
+            font-style: italic;
+        }
+
+        .heart-container {
+            text-align: center;
+            margin: 30px 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .heart {
+            font-size: 80px;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .message-section {
+            margin: 50px 0;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .message-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            border: 3px solid #d4af37;
+        }
+
+        .message-title {
+            font-size: 2rem;
+            color: #d4af37;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .message-content {
+            color: #333;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .message-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: #ff69b4;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .special-message {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #d4af37;
+            font-weight: bold;
+            margin: 40px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            color: #fff;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 30px;
+            text-decoration: none;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(255, 118, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(255, 118, 140, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 3px 8px rgba(255, 118, 140, 0.4);
+        }
+
+        .date-badge {
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeIn 1s ease-out 1s both;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #fff;
+            font-size: 1.1rem;
+            animation: fadeIn 1s ease-out 1.5s both;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .message-card {
+                padding: 25px;
+            }
+
+            .message-title {
+                font-size: 1.5rem;
+            }
+
+            .message-content {
+                font-size: 1rem;
+            }
+
+            .special-message {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="falling-emojis" id="fallingEmojis"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">💖 Com Você 💖</h1>
+            <p class="subtitle">Tudo é mais especial</p>
+        </header>
+
+        <div class="heart-container">
+            <div class="heart">💕</div>
+        </div>
+
+        <section class="message-section">
+            <div class="message-card">
+                <h2 class="message-title">Mensagem Especial</h2>
+                <div class="message-content">
+                    <p>
+                        <span class="highlight">Com você</span>, cada momento se torna mágico. Cada sorriso, cada olhar, cada palavra ganha um significado especial que só nós dois entendemos.
+                    </p>
+                    <p>
+                        <span class="highlight">Com você</span>, aprendi que o amor verdadeiro não é perfeito, mas é real. É feito de cumplicidade, de apoio mútuo, de risadas compartilhadas e de abraços que curam qualquer tristeza.
+                    </p>
+                    <p>
+                        <span class="highlight">Com você</span>, descobri que o futuro não me assusta, porque sei que estaremos juntos enfrentando tudo lado a lado. Você é meu porto seguro, minha paz, minha alegria.
+                    </p>
+                    <p>
+                        <span class="highlight">Com você</span>, quero construir todos os meus sonhos, viver todas as aventuras e criar memórias que durarão para sempre. Porque ao seu lado, tudo faz sentido.
+                    </p>
+                    <p class="signature">
+                        Para sempre seu 💗
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <div class="special-message">
+            ✨ Com Você, Para Sempre ✨
+        </div>
+
+        <div class="date-badge">
+            <button onclick="window.location.href='index.html'" style="background: transparent; border: none;">
+                <span class="btn">Voltar ao Início</span>
+            </button>
+        </div>
+
+        <footer class="footer">
+            <p>Nosso amor é eterno 💗</p>
+        </footer>
+    </div>
+
+    <script>
+        // Array de emojis para cair
+        const emojis = ["🌹", "🧸", "💕", "💖", "🌸", "💗", "✨", "💝"];
+
+        // Função para criar um emoji caindo
+        function createFallingEmoji() {
+            const emojiElement = document.createElement("div");
+            emojiElement.classList.add("emoji");
+
+            // Seleciona um emoji aleatório
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            emojiElement.textContent = randomEmoji;
+
+            // Posição horizontal aleatória
+            emojiElement.style.left = Math.random() * 100 + "%";
+
+            // Duração da animação aleatória (entre 5 e 10 segundos)
+            const duration = Math.random() * 5 + 5;
+            emojiElement.style.animationDuration = duration + "s";
+
+            // Delay aleatório
+            emojiElement.style.animationDelay = Math.random() * 2 + "s";
+
+            // Tamanho aleatório
+            const size = Math.random() * 20 + 20;
+            emojiElement.style.fontSize = size + "px";
+
+            // Adiciona ao container
+            document.getElementById("fallingEmojis").appendChild(emojiElement);
+
+            // Remove o elemento após a animação
+            setTimeout(() => {
+                emojiElement.remove();
+            }, (duration + 2) * 1000);
+        }
+
+        // Cria emojis continuamente
+        function startFallingEmojis() {
+            // Cria emojis iniciais
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createFallingEmoji();
+                }, i * 300);
+            }
+
+            // Continua criando emojis a cada 800ms
+            setInterval(() => {
+                createFallingEmoji();
+            }, 800);
+        }
+
+        // Inicia quando a página carregar
+        window.addEventListener("load", () => {
+            startFallingEmojis();
+        });
+    </script>
+</body>
+
+</html>
